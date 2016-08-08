@@ -50,6 +50,9 @@
     "autoPatchingEnable": {
       "type": "bool"
     },
+    "autoBackupEnable": {
+      "type": "bool"
+    },
     "autoPatchingDay": {
       "type": "string"
     },
@@ -176,7 +179,7 @@
               "MaintenanceWindowDuration": "60"
             },
             "AutoBackupSettings": {
-              "Enable": true,
+              "Enable": "[parameters('autoBackupEnable')]",
               "RetentionPeriod": "30",
               "EnableEncryption": false
             },
