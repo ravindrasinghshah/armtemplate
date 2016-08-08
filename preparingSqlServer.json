@@ -73,6 +73,10 @@
       "metadata": {
         "description": "SQL Server Auto Backup Encryption Password"
       }
+    },
+    "autoBackupEnable": {
+      "type": "bool",
+      "defaultValue": false
     }
   },
   "variables": {
@@ -176,28 +180,9 @@
             "MaintenanceWindowDuration": "60"
           },
           "AutoBackupSettings": {
-            "Enable": false,
+            "Enable": [ "parameters('autoBackupEnable')" ],
             "RetentionPeriod": "30",
             "EnableEncryption": false
-          }
-        }
-      }
-    },
-    {
-      "apiVersion": "2015-06-15",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('sqlVMName'), '1/SqlIaasExtension')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "type": "SqlIaaSAgent",
-        "publisher": "Microsoft.SqlServer.Management",
-        "typeHandlerVersion": "1.2",
-        "autoUpgradeMinorVersion": "true",
-        "settings": {
-          "AutoBackupSettings": {
-            "Enable": true,
-            "RetentionPeriod": "30",
-            "EnableEncryption": true
           }
         },
         "protectedSettings": {
